@@ -1,8 +1,4 @@
-import pytest
-
 from homework1.sample_project.calculator.calc import check_power_of_2
-
-# from calculator.calc import check_power_of_2
 
 
 def test_positive_case():
