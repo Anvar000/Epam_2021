@@ -32,4 +32,4 @@ def find_maximum_and_minimum(file_name: str) -> Tuple[int, int]:
             number = float(line)
             minimum = min(minimum, number)
             maximum = max(maximum, number)
-    return minimum, maximum
+    return int(minimum), int(maximum)

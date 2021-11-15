@@ -30,5 +30,4 @@ def check_fibonacci(data: Sequence[int]) -> bool:
                 return False
             first, second = second, element
         return True
-    else:
-        return False
+    return False
