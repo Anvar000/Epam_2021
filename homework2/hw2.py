@@ -21,4 +21,13 @@ from typing import List, Tuple
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
-    ...
+    """Getting major and minot elements of the given list
+
+    Args:
+        inp (List): an array of size n
+
+    Returns:
+        Tuple[int, int]: The most and the least common elements
+    """
+    sorted_list = sorted(list(set(inp)))
+    return sorted_list[-1], sorted_list[0]

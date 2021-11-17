@@ -22,4 +22,16 @@ from typing import Callable
 
 
 def cache(func: Callable) -> Callable:
-    ...
+    """Return function with cashing results"""
+    stored_values = []
+
+    def wrapper(*args, **kwargs):
+        key_of_call = args, kwargs
+        for key, value in stored_values:
+            if key == key_of_call:
+                return value
+        result = func(*args, **kwargs)
+        stored_values.append((key_of_call, result))
+        return result
+
+    return wrapper
