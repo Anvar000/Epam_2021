@@ -14,7 +14,6 @@ assert combinations([1, 2], [3, 4]) == [
     [2, 4],
 ]
 """
-from itertools import product
 from typing import Any, List
 
 
@@ -24,4 +23,8 @@ def combinations(*args: List[Any]) -> List[List]:
     Returns:
         List[List]: all combinations of given lists in a list
     """
-    return [list(i) for i in product(*args)]
+    pools = map(tuple, args)
+    result = [[]]
+    for pool in pools:
+        result = [x + [y] for x in result for y in pool]
+    return result

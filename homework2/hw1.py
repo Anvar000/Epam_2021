@@ -6,9 +6,10 @@ Given a file containing text. Complete using only default collections:
     4) Count every non ascii char
     5) Find most common non ascii char for document
 """
-import re
 import string
 from typing import Counter, Dict, List
+
+import regex as re
 
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
@@ -28,8 +29,8 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
               errors='ignore') as file:
         for line in file:
             line = line.lower()
-            line = line.translate(line.maketrans('', '', string.punctuation))
-            line = re.sub(r'[0-9]', ' ', line)
+            line = re.sub(r"\p{P}+", "", line)
+            line = re.sub(r"[0-9]", " ", line)
             for word in line.split():
                 words_with_info[len(set(word))] = word
     sorted_words_by_info = sorted(list(words_with_info.items()), reverse=True)
@@ -46,7 +47,7 @@ def get_rarest_char(file_path: str) -> str:
     Returns:
         str: the rarest chatacter from the file
     """
-    counts_of_chars: Dict[str, int] = dict()
+    counts_of_chars: Dict[str, int] = {}
     with open(file_path, mode='r',
               encoding='unicode-escape',
               errors='ignore') as file:
@@ -94,7 +95,7 @@ def count_non_ascii_chars(file_path: str) -> int:
               errors='ignore') as file:
         for line in file:
             for char in line:
-                if ord(char) > 127:
+                if not char.isascii():
                     count_non_ascii += 1
 
     return count_non_ascii
@@ -115,7 +116,7 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
               errors='ignore') as file:
         for line in file:
             for char in line:
-                if ord(char) > 127:
+                if not char.isascii():
                     non_ascii_chars[char] += 1
 
     return non_ascii_chars.most_common()[0][0]
