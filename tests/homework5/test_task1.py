@@ -1,7 +1,5 @@
 import datetime
 
-import pytest
-
 from homework5.oop_1 import Student, Teacher
 
 teacher = Teacher('Daniil', 'Shadrin')
@@ -43,17 +41,3 @@ def test_check_print(capsys):
     student.do_homework(expired_homework)
     captured = capsys.readouterr()
     assert captured.out == "You are late\n"
-
-
-def test_failed_create_student():
-    with pytest.raises(
-        TypeError, match="... required positional argument: 'last_name'"
-    ):
-        Student("Petrov")
-
-
-def test_failed_create_teacher():
-    with pytest.raises(
-        TypeError, match="... required positional argument: 'last_name'"
-    ):
-        Teacher("Petrov")
